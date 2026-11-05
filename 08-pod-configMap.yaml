@@ -8,4 +8,4 @@ spec:
       image: nginx
       envFrom:
         - configMap:
-            name: expense-configMap
+            name: expense-configmap
