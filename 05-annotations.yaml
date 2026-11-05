@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: annotations-pods
+  name: annotations-p
   labels: 
     project: expense
     enviroment: dev
