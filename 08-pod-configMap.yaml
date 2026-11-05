@@ -7,5 +7,5 @@ spec:
     - name: configmap-usage-c
       image: nginx
       envFrom:
-        - ConfigMapRef:
+        - configMapRef:
             name: expense-configmap
