@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configMap-usage-p
+spec:
+  containers:
+    - name: configMap-usage-c
+      image: nginx
+      envFrom:
+        configMap:
+          - name: expense-configMap
