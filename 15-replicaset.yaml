@@ -14,14 +14,14 @@ spec:
       enviroment: dev
       module: testing-rs-1
 # This is Pod definition
-template:
-  metadata:
-    labels: # These are Pod labels
-      project: expense
-      enviroment: dev
-      module: testing-rs-1
-  spec:
-    containers:
-    - name: nginx-c
-      image: nginx
+  template:
+    metadata:
+      labels: # These are Pod labels
+        project: expense
+        enviroment: dev
+        module: testing-rs-1
+    spec:
+      containers:
+      - name: nginx-c
+        image: nginx
 
