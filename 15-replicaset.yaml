@@ -12,14 +12,14 @@ spec:
     matchLables: # There labels are used to select the Pod and create replicas
       project: expense
       enviroment: dev
-      module: testing-rs-1
+      module: testing-rs
 # This is Pod definition
 template:
   metadata:
     labels: # These are Pod labels
       project: expense
       enviroment: dev
-      module: testing-rs-1
+      module: testing-rs
   spec:
     containers:
     - name: nginx-c
