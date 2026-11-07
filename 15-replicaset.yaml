@@ -5,11 +5,11 @@ metadata:
   labels:    # These are ReplicaSet labels
     project: expense
     enviroment: dev
-    module: testing-rs-1
+    module: testing-rs
 spec:
   replicas: 3
   selector:
-    matchLables: # There labels are used to select the Pod and create replicas
+    matchLabels: # There labels are used to select the Pod and create replicas
       project: expense
       enviroment: dev
       module: testing-rs-1
