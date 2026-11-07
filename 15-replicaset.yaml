@@ -24,4 +24,20 @@ spec:
       containers:
       - name: nginx-c
         image: nginx:stable-alpine3.24-perl
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gana-serv
+spec:
+  type: ClusterIP
+  selector:
+    project: expense
+    enviroment: dev
+    module: testing-rs-1
+  ports:
+    - name: gana-port
+      protocol: TCP
+      port: 80
+      targetPort: 80
 
