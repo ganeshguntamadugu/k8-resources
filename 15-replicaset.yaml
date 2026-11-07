@@ -1,4 +1,4 @@
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: nginx-rs
@@ -12,14 +12,14 @@ spec:
     matchLables: # There labels are used to select the Pod and create replicas
       project: expense
       enviroment: dev
-      module: testing-rs
+      module: testing-rs-1
 # This is Pod definition
 template:
   metadata:
     labels: # These are Pod labels
       project: expense
       enviroment: dev
-      module: testing-rs
+      module: testing-rs-1
   spec:
     containers:
     - name: nginx-c
