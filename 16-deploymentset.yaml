@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-rs
+  labels:    # These are ReplicaSet labels
+    project: expense
+    enviroment: dev
+    module: testing-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels: # There labels are used to select the Pod and create replicas
+      project: expense
+      enviroment: dev
+      module: testing-rs-1
+# This is Pod definition
+  template:
+    metadata:
+      labels: # These are Pod labels
+        project: expense
+        enviroment: dev
+        module: testing-rs-1
+    spec:
+      containers:
+      - name: nginx-c
+        image: nginx:stable-alpine3.24-perl
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gana-serv
+spec:
+  type: ClusterIP
+  selector:
+    project: expense
+    enviroment: dev
+    module: testing-rs-1
+  ports:
+    - name: gana-port
+      protocol: TCP
+      port: 80
+      targetPort: 80
+
