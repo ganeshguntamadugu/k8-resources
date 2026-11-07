@@ -5,7 +5,7 @@ metadata:
   labels:    # These are ReplicaSet labels
     project: expense
     enviroment: dev
-    module: testing-rs
+    module: testing-rs-1
 spec:
   replicas: 3
   selector:
