@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-dynamic-claim
+spec:
+  storageClassName: "ebs-sc" 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebs-dynamic-pod
+  labels:
+    purpose: ebs-dynamic-testing
+spec:
+  containers:
+  - name: ebs-dynamic-pod-c
+    image: nginx
+    volumeMounts: # Connects that volume to the container.
+    - name: expense-storage
+      mountPath: /usr/share/nginx/html # Where the volume is accessible inside the container.
+  nodeSelector: # To define in which zone the Pod should create
+    topology.kubernetes.io/zone: us-east-1f
+  volumes: # Defines the volume inside the Pod.
+  - name: expense-storage
+    persistentVolumeClaim:
+      claimName: ebs-dynamic-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ebs-dynamic
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: ebs-dynamic-testing
+  ports:
+    - name: ebs-dynamic-port
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30081
