@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-claim
+  name: ebs-static-claim
 spec:
   storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
   volumeName: ebs-static
@@ -24,3 +24,21 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebs-static-pod
+spec:
+  containers:
+  - name: ebs-static-pod-c
+    image: nginx
+    volumeMounts:
+    - name: expense-storage
+      mountPath: /usr/share/nginx/html
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1f
+  volumes:
+  - name: expense-storage
+    persistentVolumeClaim:
+      claimName: ebs-static-claim
