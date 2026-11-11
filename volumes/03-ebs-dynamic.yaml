@@ -23,8 +23,8 @@ spec:
     volumeMounts: # Connects that volume to the container.
     - name: expense-storage
       mountPath: /usr/share/nginx/html # Where the volume is accessible inside the container.
-  nodeSelector: # To define in which zone the Pod should create
-    topology.kubernetes.io/zone: us-east-1f
+  # nodeSelector: # To define in which zone the Pod should create
+  #   topology.kubernetes.io/zone: us-east-1f
   volumes: # Defines the volume inside the Pod.
   - name: expense-storage
     persistentVolumeClaim:
