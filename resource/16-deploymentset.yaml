@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-rs
-  labels:    # These are ReplicaSet labels
+  labels:    # These are Deployment labels
     project: expense
     enviroment: dev
     module: testing-rs
