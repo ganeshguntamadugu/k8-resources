@@ -48,7 +48,7 @@ metadata:
     enviroment: dev
     module: testing-sfs-1
 spec:
-  replicas: 3
+  replicas: 2
   selector:   
     matchLabels:    # There labels are used to select the Pod and create replicas
       project: expense
