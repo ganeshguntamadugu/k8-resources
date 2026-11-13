@@ -13,8 +13,8 @@ spec:
       project: expense
       enviroment: dev
       module: testing-rs-1
-# This is Pod definition
-  template:
+
+  template: # This is Pod definition
     metadata:
       labels: # These are Pod labels
         project: expense
