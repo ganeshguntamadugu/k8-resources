@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-dynamic-claim
+spec:
+  storageClassName: "efs-sc" 
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-dynamic-pod
+  labels:
+    purpose: efs-dynamic-testing
+spec:
+  containers:
+  - name: efs-dynamic-pod-c
+    image: nginx
+    volumeMounts: # Connects that volume to the container.
+    - name: expense-storage-dynamic
+      mountPath: /usr/share/nginx/html # Where the volume is accessible inside the container.
+  # nodeSelector: # To define in which zone the Pod should create
+  #   topology.kubernetes.io/zone: us-east-1f
+  volumes: # Defines the volume inside the Pod.
+  - name: expense-storage-dynamic
+    persistentVolumeClaim:
+      claimName: efs-dynamic-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-dynamic
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: efs-dynamic-testing
+  ports:
+    - name: efs-dynamic-port
+      protocol: TCP
+      port: 80 # service port
+      targetPort: 80  # container port
+      nodePort: 30083

@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-sc
+reclaimPolicy: Retain
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-06c6a61e8863a30ef
+  directoryPerms: "700"
+  basePath: "/expense" # optional
+  
