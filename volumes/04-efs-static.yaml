@@ -26,3 +26,38 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-static-pod
+  labels:
+    purpose: efs-static-testing
+spec:
+  containers:
+  - name: efs-static-pod-c
+    image: nginx
+    volumeMounts: # Connects that volume to the container.
+    - name: expense-storage-efs
+      mountPath: /usr/share/nginx/html # Where the volume is accessible inside the container.
+  # nodeSelector: # To define in which zone the Pod should create
+  #   topology.kubernetes.io/zone: us-east-1f
+  volumes: # Defines the volume inside the Pod.
+  - name: expense-storage-efs
+    persistentVolumeClaim:
+      claimName: efs-static-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-static
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: efs-static-testing
+  ports:
+    - name: efs-static-port
+      protocol: TCP
+      port: 80 # service port
+      targetPort: 80  # container port
+      nodePort: 30081      
