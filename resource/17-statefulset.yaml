@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: mysql-headless
 spec:
-  ClusterIP: None # Headless service there is no cluster IP
+  clusterIP: None # Headless service there is no cluster IP
   selector:
     project: expense
     enviroment: dev
