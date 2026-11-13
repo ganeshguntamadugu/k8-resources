@@ -1,12 +1,3 @@
-# This is storage class
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: mysql-sc
-reclaimPolicy: Retain
-provisioner: ebs.csi.aws.com
-volumeBindingMode: WaitForFirstConsumer
----
 apiVersion: v1
 kind: Service
 metadata:
