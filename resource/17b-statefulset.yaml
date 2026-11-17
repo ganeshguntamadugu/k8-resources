@@ -58,11 +58,11 @@ spec:
       # terminationGracePeriodSeconds: 10
       containers:
       - name: mysql-c
-        image: nginx
+        image: ganeshguntamadugu/mysql:v1
         volumeMounts:  # Connects that volume to the container.
         - name: mysql-storage
           mountPath: /var/lib/mysql  # Where the volume is accessible inside the container.
-  volumeClaimTemplates: # PVC definision
+  volumeClaimTemplates: # This is  PVC definision
   - metadata:
       name: mysql-storage
     spec:
